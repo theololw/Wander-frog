@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dxw1ijd044xl5"]
+
+[ext_resource type="Script" uid="uid://bk16br77wktuw" path="res://scenes/wander_frog_spawner.gd" id="1_ogkje"]
+
+[node name="wander_frog_spawner" type="Node2D" unique_id=945205511]
+script = ExtResource("1_ogkje")
+
+[node name="Timer" type="Timer" parent="." unique_id=1009059323]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

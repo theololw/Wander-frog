@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b3eaaskjeioym"]
+
+[ext_resource type="Texture2D" uid="uid://bk8wqhaeyn3kw" path="res://icon.svg" id="1_ct5vs"]
+[ext_resource type="Script" uid="uid://dytb312sm7omw" path="res://scripts/pressure_plate.gd" id="1_xtofl"]
+[ext_resource type="Texture2D" uid="uid://u2llomso3pkp" path="res://imagews/pressure_plate.png" id="3_r34r6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lg3a"]
+size = Vector2(16, 16)
+
+[node name="pressure plate" type="Area2D" unique_id=2146863895]
+z_index = -2
+collision_layer = 4
+collision_mask = 66
+script = ExtResource("1_xtofl")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=119001093]
+visible = false
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ct5vs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=443786748]
+shape = SubResource("RectangleShape2D_8lg3a")
+
+[node name="check_overlapping" type="Timer" parent="." unique_id=2100379405]
+wait_time = 0.05
+autostart = true
+
+[node name="texture" type="Sprite2D" parent="." unique_id=1351373594]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("3_r34r6")
+hframes = 2
+
+[connection signal="timeout" from="check_overlapping" to="." method="_on_check_overlapping_timeout"]

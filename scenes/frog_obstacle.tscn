@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cse1lsfoye7ct"]
+
+[ext_resource type="Script" uid="uid://d1j3ffdgl5s43" path="res://scripts/frog_obstacle.gd" id="1_hkgdt"]
+[ext_resource type="Texture2D" uid="uid://cfmn84cllnlbu" path="res://imagews/rock.png" id="2_ikqdg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lg3a"]
+size = Vector2(16, 16)
+
+[node name="frog_obstacle" type="StaticBody2D" unique_id=1923676976]
+collision_layer = 128
+collision_mask = 66
+script = ExtResource("1_hkgdt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=570733696]
+shape = SubResource("RectangleShape2D_8lg3a")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=781864386]
+visible = false
+color = Color(0.35782215, 0.42085066, 0.40632385, 1)
+polygon = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 8)
+
+[node name="Rock" type="Sprite2D" parent="." unique_id=1857186801]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_ikqdg")
+hframes = 4

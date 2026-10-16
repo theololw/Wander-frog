@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bcp0tgo16pnvw"]
+
+[ext_resource type="Script" uid="uid://c7y54r77ko4uk" path="res://scenes/small_frog.gd" id="1_6uo5f"]
+[ext_resource type="Texture2D" uid="uid://0rjxatweihv6" path="res://imagews/frog.png" id="1_s6opp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lg3a"]
+size = Vector2(32, 32)
+
+[node name="small_frog" type="Node2D" unique_id=1592753320]
+script = ExtResource("1_6uo5f")
+
+[node name="Frog" type="Sprite2D" parent="." unique_id=1000806416]
+z_index = -1
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_s6opp")
+hframes = 8
+vframes = 2
+
+[node name="light_detector" type="Area2D" parent="." unique_id=565039813]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="light_detector" unique_id=1624011094]
+visible = false
+shape = SubResource("RectangleShape2D_8lg3a")
+
+[connection signal="area_entered" from="light_detector" to="." method="_on_light_detector_area_entered"]
+[connection signal="area_exited" from="light_detector" to="." method="_on_light_detector_area_exited"]

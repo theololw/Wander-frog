@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://d00rwdgiss8pd"]
+
+[ext_resource type="Texture2D" uid="uid://bpsbj625xxth5" path="res://imagews/light.png" id="1_4bs0w"]
+[ext_resource type="Script" uid="uid://dhoohvguwo8gs" path="res://scripts/light_thingy.gd" id="1_mt02v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lg3a"]
+size = Vector2(16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8lg3a"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6kal"]
+
+[node name="light thingy" type="Node2D" unique_id=958988397]
+script = ExtResource("1_mt02v")
+
+[node name="pivot" type="Node2D" parent="." unique_id=1045614895]
+
+[node name="Polygon2D" type="Polygon2D" parent="pivot" unique_id=1819609431]
+polygon = PackedVector2Array(0, -16, -8, -8, -8, 8, 8, 8, 16, 0, 16, 16, -16, 16, -16, -16)
+
+[node name="light_receptor" type="Area2D" parent="." unique_id=665300114]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="light_receptor" unique_id=1887625787]
+shape = SubResource("RectangleShape2D_8lg3a")
+
+[node name="PointLight1" type="PointLight2D" parent="light_receptor" unique_id=678540423]
+visible = false
+texture_filter = 1
+position = Vector2(32, 0)
+color = Color(1, 0.75686276, 0.4392157, 1)
+shadow_enabled = true
+texture = ExtResource("1_4bs0w")
+offset = Vector2(96, 0)
+texture_scale = 2.0
+
+[node name="PointLight2" type="PointLight2D" parent="light_receptor" unique_id=2039172833]
+visible = false
+texture_filter = 1
+position = Vector2(0, -32)
+rotation = -1.5707964
+color = Color(1, 0.75686276, 0.4392157, 1)
+shadow_enabled = true
+texture = ExtResource("1_4bs0w")
+offset = Vector2(96, 0)
+texture_scale = 2.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=319681892]
+occluder = SubResource("OccluderPolygon2D_8lg3a")
+
+[node name="lightHitbox" type="Area2D" parent="." unique_id=539858369]
+position = Vector2(56, 0)
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="lightHitbox" unique_id=1847097843]
+polygon = PackedVector2Array(0, 0, 320, -32, 320, 32)
+
+[node name="lightHitbox2" type="Area2D" parent="." unique_id=1596349324]
+position = Vector2(0, -56)
+rotation = -1.5707964
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="lightHitbox2" unique_id=531725894]
+polygon = PackedVector2Array(0, 0, 320, -32, 320, 32)
+
+[node name="watcher1" type="Area2D" parent="." unique_id=1210860235]
+position = Vector2(56, 0)
+collision_layer = 4
+collision_mask = 18
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="watcher1" unique_id=35580362]
+polygon = PackedVector2Array(0, 0, 320, -96, 320, 96)
+
+[node name="watcher2" type="Area2D" parent="." unique_id=135750096]
+position = Vector2(0, -56)
+collision_layer = 4
+collision_mask = 18
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="watcher2" unique_id=330566458]
+rotation = -1.5707964
+polygon = PackedVector2Array(0, 0, 320, -95.999985, 320, 96.000015)
+
+[node name="lightthingy" type="StaticBody2D" parent="." unique_id=1125989837]
+collision_layer = 20
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lightthingy" unique_id=321032656]
+shape = SubResource("RectangleShape2D_j6kal")
+
+[connection signal="area_entered" from="light_receptor" to="." method="_on_light_receptor_area_entered"]
+[connection signal="area_exited" from="light_receptor" to="." method="_on_light_receptor_area_exited"]
+[connection signal="body_entered" from="watcher1" to="." method="_on_player_watcher_1_body_entered"]
+[connection signal="body_exited" from="watcher1" to="." method="_on_player_watcher_1_body_exited"]
+[connection signal="body_entered" from="watcher2" to="." method="_on_player_watcher_2_body_entered"]
+[connection signal="body_exited" from="watcher2" to="." method="_on_player_watcher_2_body_exited"]

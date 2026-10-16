@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dg2sbmmyhdhvk"]
+
+[ext_resource type="Script" uid="uid://d0p7kwdppmlh7" path="res://scenes/inverse_kinematic.gd" id="1_t8qio"]
+
+[sub_resource type="Curve" id="Curve_8lg3a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.54999995, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="procedural leg" type="Node2D" unique_id=1234444956]
+script = ExtResource("1_t8qio")
+
+[node name="base" type="Node2D" parent="." unique_id=604542652]
+
+[node name="Polygon2D" type="Polygon2D" parent="base" unique_id=1469720365]
+polygon = PackedVector2Array(-8, 0, 0, 8, 8, 0, 0, -8)
+
+[node name="joint" type="Node2D" parent="." unique_id=2080258340]
+position = Vector2(128, -64)
+
+[node name="Polygon2D" type="Polygon2D" parent="joint" unique_id=1073803275]
+polygon = PackedVector2Array(-8, 0, 0, 8, 8, 0, 0, -8)
+
+[node name="goal" type="Node2D" parent="." unique_id=319803067]
+position = Vector2(320, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="goal" unique_id=215314025]
+polygon = PackedVector2Array(-8, 0, 0, 8, 8, 0, 0, -8)
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1888467590]
+points = PackedVector2Array(0, 0, 128, -64, 320, 0)
+width = 17.52
+width_curve = SubResource("Curve_8lg3a")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

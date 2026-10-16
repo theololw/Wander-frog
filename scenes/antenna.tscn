@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://cr3ypv0tgjx50"]
+
+[ext_resource type="Script" uid="uid://vedge5lrlbjb" path="res://scenes/antenna.gd" id="1_cymb1"]
+[ext_resource type="FontFile" uid="uid://bh3p53auw332v" path="res://imagews/EndlessBossBattleRegular-v7Ey.ttf" id="2_dwh18"]
+[ext_resource type="Texture2D" uid="uid://clalgxi04h50p" path="res://imagews/antenna.png" id="2_lyb31"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lg3a"]
+size = Vector2(80, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lyb31"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu52v"]
+size = Vector2(24, 64)
+
+[node name="antenna" type="Node2D" unique_id=1521149506]
+script = ExtResource("1_cymb1")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=675067129]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1712347734]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_8lg3a")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1245832432]
+position = Vector2(-4, -40)
+shape = SubResource("RectangleShape2D_lyb31")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=170210748]
+position = Vector2(0, 48)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=142557277]
+position = Vector2(56, -16)
+shape = SubResource("RectangleShape2D_bu52v")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=2026654584]
+position = Vector2(-56, -16)
+shape = SubResource("RectangleShape2D_bu52v")
+
+[node name="button" type="Node2D" parent="." unique_id=70225828]
+z_index = 11
+position = Vector2(40, -56)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="button" unique_id=116458914]
+visible = false
+
+[node name="Label" type="Label" parent="button/CanvasLayer" unique_id=1400246036]
+offset_left = 496.0
+offset_top = 272.0
+offset_right = 788.0
+offset_bottom = 303.0
+theme_override_colors/font_color = Color(1, 0.49803922, 0.31764707, 1)
+theme_override_colors/font_outline_color = Color(0.44705883, 0, 0.14901961, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_dwh18")
+theme_override_font_sizes/font_size = 30
+text = "[ left click/Space ]"
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=251342897]
+visible = false
+color = Color(1, 0.45490196, 0, 1)
+polygon = PackedVector2Array(-64, 64, 64, 64, 64, -64, -64, -64)
+
+[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=1251066624]
+visible = false
+z_index = -2
+position = Vector2(0, 48)
+color = Color(0, 0.74509805, 0.39607844, 1)
+polygon = PackedVector2Array(64, -32, 88, -32, 88, 32, 64, 32)
+
+[node name="Polygon2D3" type="Polygon2D" parent="." unique_id=1819293861]
+visible = false
+z_index = -2
+position = Vector2(-152, 48)
+color = Color(0, 0.74509805, 0.39607844, 1)
+polygon = PackedVector2Array(64, -32, 88, -32, 88, 32, 64, 32)
+
+[node name="Antenna" type="Sprite2D" parent="." unique_id=264782083]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, -8)
+scale = Vector2(2, 2)
+texture = ExtResource("2_lyb31")

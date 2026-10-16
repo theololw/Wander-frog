@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddjmuvdgw5ia1"
+path="res://.godot/imported/mow.mp3-db47a9d011d75f4226c4acc1ffd3e3ad.mp3str"
+
+[deps]
+
+source_file="res://sounds/mountain song/mow.mp3"
+dest_files=["res://.godot/imported/mow.mp3-db47a9d011d75f4226c4acc1ffd3e3ad.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

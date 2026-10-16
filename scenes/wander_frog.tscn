@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://cxd7jjiplqmqx"]
+
+[ext_resource type="Script" uid="uid://3ajio8xja56k" path="res://scripts/wander_frog.gd" id="1_8i0vw"]
+[ext_resource type="Texture2D" uid="uid://0rjxatweihv6" path="res://imagews/frog.png" id="1_sbidq"]
+[ext_resource type="AudioStream" uid="uid://ccbe6gtpltdla" path="res://sounds/small frog.mp3" id="3_j336p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bu52v"]
+radius = 14.035668
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu52v"]
+
+[sub_resource type="Animation" id="Animation_j336p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Frog:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Frog:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bf5sx"]
+resource_name = "dissapear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frog:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8i0vw"]
+resource_name = "runnin"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Frog:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j336p"]
+_data = {
+&"RESET": SubResource("Animation_j336p"),
+&"dissapear": SubResource("Animation_bf5sx"),
+&"runnin": SubResource("Animation_8i0vw")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h1ek"]
+
+[node name="wander_frog" type="CharacterBody2D" unique_id=242999660 groups=["wanderFrog"]]
+z_index = -1
+collision_layer = 64
+collision_mask = 128
+script = ExtResource("1_8i0vw")
+
+[node name="Frog" type="Sprite2D" parent="." unique_id=650267835]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_sbidq")
+hframes = 8
+vframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1145714758]
+shape = SubResource("CircleShape2D_bu52v")
+
+[node name="light_sensor" type="Area2D" parent="." unique_id=1339852314]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="light_sensor" unique_id=311679066]
+shape = SubResource("RectangleShape2D_bu52v")
+
+[node name="direction" type="Node2D" parent="." unique_id=409237292]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1088402203]
+libraries/ = SubResource("AnimationLibrary_j336p")
+autoplay = &"runnin"
+
+[node name="tree_sensor" type="Area2D" parent="." unique_id=49739299]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tree_sensor" unique_id=1130060182]
+shape = SubResource("RectangleShape2D_5h1ek")
+
+[node name="invic_cooldown" type="Timer" parent="." unique_id=994480865]
+autostart = true
+
+[node name="live_time" type="Timer" parent="." unique_id=1979026011]
+wait_time = 12.0
+autostart = true
+
+[node name="mow" type="AudioStreamPlayer2D" parent="." unique_id=644144535]
+stream = ExtResource("3_j336p")
+volume_db = -8.345
+
+[connection signal="area_entered" from="light_sensor" to="." method="_on_light_sensor_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="invic_cooldown" to="." method="_on_invic_cooldown_timeout"]
+[connection signal="timeout" from="live_time" to="." method="_on_live_time_timeout"]

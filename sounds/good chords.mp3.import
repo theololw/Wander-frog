@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cxy8brwekij6u"
+path="res://.godot/imported/good chords.mp3-e386654c9cb2bd90b2c67a3769110cb2.mp3str"
+
+[deps]
+
+source_file="res://sounds/good chords.mp3"
+dest_files=["res://.godot/imported/good chords.mp3-e386654c9cb2bd90b2c67a3769110cb2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

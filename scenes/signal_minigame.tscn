@@ -1,0 +1,229 @@
+[gd_scene format=3 uid="uid://toqpkatu6pca"]
+
+[ext_resource type="Script" uid="uid://dwnf73sl6d2iq" path="res://scripts/signal_minigame.gd" id="1_0vs8b"]
+[ext_resource type="Texture2D" uid="uid://hgy15gfa1cm2" path="res://imagews/space_bg.png" id="2_vwwde"]
+[ext_resource type="AudioStream" uid="uid://bbj56q3ldvhep" path="res://sounds/mountain song/chords again.mp3" id="3_gpmyv"]
+[ext_resource type="Texture2D" uid="uid://jf3rqgwit6qa" path="res://imagews/goalStar.png" id="3_uk5os"]
+[ext_resource type="AudioStream" uid="uid://ccdvukjq2v0va" path="res://sounds/bad chords.mp3" id="4_gpmyv"]
+[ext_resource type="Script" uid="uid://dbfgb870ei8wa" path="res://scripts/star_starer.gd" id="6_uk5os"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0vs8b"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[sub_resource type="Animation" id="Animation_gpmyv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.5, 2.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vwwde"]
+resource_name = "zoom out"
+length = 13.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2.5, 2.5), Vector2(1.482, 1.482)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(11.966666, 12.799999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xu52b"]
+_data = {
+&"RESET": SubResource("Animation_gpmyv"),
+&"zoom out": SubResource("Animation_vwwde")
+}
+
+[sub_resource type="Environment" id="Environment_8lg3a"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.7
+glow_strength = 1.42
+glow_bloom = 1.0
+
+[node name="signal_minigame1" type="Node2D" unique_id=1519188829]
+script = ExtResource("1_0vs8b")
+
+[node name="abckground" type="Sprite2D" parent="." unique_id=1800186864]
+modulate = Color(0.13885854, 0.13885854, 0.13885854, 1)
+texture_filter = 1
+position = Vector2(1258, 1246)
+scale = Vector2(19.718748, 19.531248)
+texture = SubResource("CompressedTexture2D_0vs8b")
+
+[node name="SpaceBg" type="Sprite2D" parent="." unique_id=1824535456]
+modulate = Color(0.09239706, 0.09239707, 0.092397, 1)
+texture_filter = 1
+position = Vector2(1272, 1272)
+scale = Vector2(20, 20)
+texture = ExtResource("2_vwwde")
+
+[node name="goal" type="Sprite2D" parent="." unique_id=584824501]
+texture_filter = 1
+position = Vector2(1696, 1280)
+scale = Vector2(4, 4)
+texture = ExtResource("3_uk5os")
+
+[node name="chords" type="AudioStreamPlayer2D" parent="goal" unique_id=1668384395]
+stream = ExtResource("3_gpmyv")
+volume_db = 3.0
+autoplay = true
+attenuation = 2.9281707
+
+[node name="PointLight2D" type="PointLight2D" parent="goal" unique_id=374524680]
+texture_filter = 1
+texture = ExtResource("3_uk5os")
+texture_scale = 2.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=609153817]
+position = Vector2(1200, 672)
+zoom = Vector2(2.5, 2.5)
+limit_left = 0
+limit_top = 0
+limit_right = 2500
+limit_bottom = 2500
+limit_smoothed = true
+
+[node name="signal_circle" type="Node2D" parent="Camera2D" unique_id=1261875519]
+z_index = 4
+
+[node name="Polygon2D" type="Polygon2D" parent="Camera2D/signal_circle" unique_id=829175105]
+visible = false
+polygon = PackedVector2Array(-8, 0, 0, -8, 8, 0, 0, 8)
+
+[node name="anchor" type="Node2D" parent="Camera2D/signal_circle" unique_id=24317627]
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor" unique_id=1057263342 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor2" type="Node2D" parent="Camera2D/signal_circle" unique_id=1382478927]
+rotation = 0.5235988
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor2" unique_id=244862777 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor3" type="Node2D" parent="Camera2D/signal_circle" unique_id=1562993747]
+rotation = 1.0471976
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor3" unique_id=1870907940 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor4" type="Node2D" parent="Camera2D/signal_circle" unique_id=1114100462]
+rotation = 1.5707964
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor4" unique_id=2054149216 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor5" type="Node2D" parent="Camera2D/signal_circle" unique_id=1288232788]
+rotation = 2.0943952
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor5" unique_id=1209511405 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor6" type="Node2D" parent="Camera2D/signal_circle" unique_id=1198783644]
+rotation = 2.6179938
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor6" unique_id=1713194757 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor7" type="Node2D" parent="Camera2D/signal_circle" unique_id=1280795969]
+rotation = 3.1415927
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor7" unique_id=408451955 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor8" type="Node2D" parent="Camera2D/signal_circle" unique_id=762714911]
+rotation = 3.6651914
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor8" unique_id=509390502 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor9" type="Node2D" parent="Camera2D/signal_circle" unique_id=2109110502]
+rotation = 4.1887903
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor9" unique_id=274772814 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor10" type="Node2D" parent="Camera2D/signal_circle" unique_id=1184034609]
+rotation = 4.712389
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor10" unique_id=206884867 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor11" type="Node2D" parent="Camera2D/signal_circle" unique_id=942099430]
+rotation = 5.2359877
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor11" unique_id=1933123236 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor12" type="Node2D" parent="Camera2D/signal_circle" unique_id=19028175]
+rotation = 5.7595863
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor12" unique_id=1240418304 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="anchor13" type="Node2D" parent="Camera2D/signal_circle" unique_id=1391745538]
+
+[node name="pip" type="Node2D" parent="Camera2D/signal_circle/anchor13" unique_id=1426594412 groups=["pip"]]
+position = Vector2(100, 0)
+
+[node name="Line2D" type="Line2D" parent="Camera2D/signal_circle" unique_id=196090230]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 5.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=342584562]
+stream = ExtResource("4_gpmyv")
+autoplay = true
+
+[node name="animation" type="AnimationPlayer" parent="." unique_id=911598226]
+libraries/ = SubResource("AnimationLibrary_xu52b")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=299853479]
+
+[node name="star starer" type="Node2D" parent="." unique_id=1141980923]
+script = ExtResource("6_uk5os")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1516690616]
+environment = SubResource("Environment_8lg3a")
+
+[connection signal="animation_finished" from="animation" to="." method="_on_animation_animation_finished"]

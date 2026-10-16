@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://dda1pxci17n6j"]
+
+[ext_resource type="Texture2D" uid="uid://0rjxatweihv6" path="res://imagews/frog.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://bfu1fxx6k06u0" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://cwr43hw47fyf" path="res://scripts/flashlight.gd" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://bpsbj625xxth5" path="res://imagews/light.png" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://b23qvwmhgtq6m" path="res://imagews/flashlight.png" id="5_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://ccbe6gtpltdla" path="res://sounds/small frog.mp3" id="6_tuyoq"]
+[ext_resource type="FontFile" uid="uid://bh3p53auw332v" path="res://imagews/EndlessBossBattleRegular-v7Ey.ttf" id="7_fjrip"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_avsvi"]
+radius = 14.0
+
+[sub_resource type="Animation" id="Animation_g2els"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Frog:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+resource_name = "runnin"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Frog:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dqkch"]
+resource_name = "sittin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Frog:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
+_data = {
+&"RESET": SubResource("Animation_g2els"),
+&"runnin": SubResource("Animation_qhqgy"),
+&"sittin": SubResource("Animation_dqkch")
+}
+
+[node name="player" type="CharacterBody2D" unique_id=549463303]
+collision_layer = 2
+collision_mask = 133
+script = ExtResource("1_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1381785424]
+shape = SubResource("CircleShape2D_avsvi")
+
+[node name="Frog" type="Sprite2D" parent="." unique_id=939966115]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_3vyb7")
+hframes = 8
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=52399212]
+libraries/ = SubResource("AnimationLibrary_dqkch")
+
+[node name="direction" type="Node2D" parent="." unique_id=6728970]
+
+[node name="Polygon2D" type="Polygon2D" parent="direction" unique_id=491420156]
+visible = false
+polygon = PackedVector2Array(-8, 0, 0, -8, 8, 0, 0, 8)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=292768986]
+zoom = Vector2(3.4, 3.4)
+
+[node name="flashlight" type="Node2D" parent="." unique_id=336918598]
+visible = false
+position = Vector2(0, 8)
+script = ExtResource("3_dqkch")
+
+[node name="PointLight2D" type="PointLight2D" parent="flashlight" unique_id=717122317]
+texture_filter = 1
+color = Color(1, 0.75686276, 0.4392157, 1)
+shadow_enabled = true
+texture = ExtResource("3_qhqgy")
+offset = Vector2(118.61, 0)
+texture_scale = 2.0
+
+[node name="lightHitbox" type="Area2D" parent="flashlight" unique_id=1386830066]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="flashlight/lightHitbox" unique_id=1511371696]
+polygon = PackedVector2Array(24, 0, 384, -104, 384, 104)
+
+[node name="RayCast2D" type="RayCast2D" parent="flashlight" unique_id=1689365008]
+target_position = Vector2(1024, 0)
+
+[node name="Flashlight" type="Sprite2D" parent="flashlight" unique_id=1695156556]
+texture_filter = 1
+position = Vector2(2, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("5_qlg0r")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=703183359]
+
+[node name="mow" type="AudioStreamPlayer2D" parent="." unique_id=1000847037]
+stream = ExtResource("6_tuyoq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1267583573]
+visible = false
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1860832168]
+offset_left = 496.0
+offset_top = 432.0
+offset_right = 788.0
+offset_bottom = 497.0
+theme_override_colors/font_color = Color(1, 0.49803922, 0.31764707, 1)
+theme_override_colors/font_outline_color = Color(0.44705883, 0, 0.14901961, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("7_fjrip")
+theme_override_font_sizes/font_size = 30
+text = "[ WASD ]
+To move"
+horizontal_alignment = 1
+
+[node name="WASD timer" type="Timer" parent="." unique_id=180142099]
+wait_time = 35.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="WASD timer" to="." method="_on_wasd_timer_timeout"]

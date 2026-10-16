@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cksifsikn2df"]
+
+[ext_resource type="Texture2D" uid="uid://b6rlecyefxldl" path="res://imagews/stars.png" id="1_ucpii"]
+[ext_resource type="Script" uid="uid://btcrdyqfw14r6" path="res://scenes/stars.gd" id="2_rs5ub"]
+
+[node name="Stars" type="Sprite2D" unique_id=631387799]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("1_ucpii")
+hframes = 3
+script = ExtResource("2_rs5ub")

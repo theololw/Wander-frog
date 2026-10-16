@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bnchkfjrrta0b"]
+
+[ext_resource type="Script" uid="uid://ddlaxspa3kfo8" path="res://scripts/door.gd" id="1_hpvv5"]
+[ext_resource type="Texture2D" uid="uid://blxo8teux8dx0" path="res://imagews/door.png" id="2_uvdjg"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8lg3a"]
+polygon = PackedVector2Array(0, 0, 0, 16, -64, 16, -64, 0)
+
+[node name="door1" type="Node2D" unique_id=128693916]
+script = ExtResource("1_hpvv5")
+
+[node name="leftdoor" type="StaticBody2D" parent="." unique_id=1042031916]
+collision_layer = 129
+
+[node name="Polygon2D" type="Polygon2D" parent="leftdoor" unique_id=523063890]
+visible = false
+polygon = PackedVector2Array(0, 0, 0, 16, -64, 16, -64, 0)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="leftdoor" unique_id=211819795]
+occluder = SubResource("OccluderPolygon2D_8lg3a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="leftdoor" unique_id=1858440958]
+polygon = PackedVector2Array(-64, 0, 0, 0, -8, 16, -64, 16)
+
+[node name="Door" type="Sprite2D" parent="leftdoor" unique_id=478364501]
+texture_filter = 1
+position = Vector2(-32, 8)
+scale = Vector2(2, 2)
+texture = ExtResource("2_uvdjg")
+
+[node name="rightdoor" type="StaticBody2D" parent="." unique_id=1847765721]
+position = Vector2(128, 0)
+collision_layer = 129
+
+[node name="Polygon2D" type="Polygon2D" parent="rightdoor" unique_id=1576838574]
+visible = false
+polygon = PackedVector2Array(-64, 0, -128, 0, -128, 16, -64, 16)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="rightdoor" unique_id=404568090]
+position = Vector2(-64, 0)
+occluder = SubResource("OccluderPolygon2D_8lg3a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="rightdoor" unique_id=365733118]
+polygon = PackedVector2Array(-128, 0, -64, 0, -64, 16, -120, 16)
+
+[node name="Door" type="Sprite2D" parent="rightdoor" unique_id=203061336]
+texture_filter = 1
+position = Vector2(-96, 8)
+scale = Vector2(2, 2)
+texture = ExtResource("2_uvdjg")
+flip_h = true
