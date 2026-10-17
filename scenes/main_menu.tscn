@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c4shaegl5k0c8" path="res://imagews/buttons.png" id="4_wu84c"]
 [ext_resource type="Texture2D" uid="uid://dvqb1g4277tr6" path="res://imagews/tree.png" id="5_8ln24"]
 [ext_resource type="FontFile" uid="uid://bh3p53auw332v" path="res://imagews/EndlessBossBattleRegular-v7Ey.ttf" id="6_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://0rjxatweihv6" path="res://imagews/frog.png" id="7_oa1go"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wu84c"]
 texture = ExtResource("3_bqqt6")
@@ -375,6 +376,15 @@ theme_override_constants/outline_size = 18
 theme_override_fonts/font = ExtResource("6_rtw2f")
 theme_override_font_sizes/font_size = 54
 text = "Thank you for playing :)"
+
+[node name="Frog" type="Sprite2D" parent="." unique_id=2090768337]
+z_index = -1
+texture_filter = 1
+position = Vector2(1040, 472)
+scale = Vector2(8, 8)
+texture = ExtResource("7_oa1go")
+hframes = 4
+frame = 1
 
 [connection signal="button_down" from="button1/Button" to="." method="_on_button_button_down"]
 [connection signal="pressed" from="button1/Button" to="." method="_on_button_pressed"]

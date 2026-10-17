@@ -9,6 +9,8 @@ func restart_song():
 	$notes.stop()
 	$trumpet.stop()
 	$mow.stop()
+	$final1.stop()
+	$final2.stop()
 	$"bass notes".play()
 	$bass.play()
 	$chords.play()
@@ -17,6 +19,9 @@ func restart_song():
 	$notes.play()
 	$trumpet.play()
 	$mow.play()
+	$final1.play()
+	$final2.play()
+	
 
 func full_song():
 	$"bass notes".volume_db = 0
@@ -27,6 +32,8 @@ func full_song():
 	$notes.volume_db = 0
 	$trumpet.volume_db = 0
 	$mow.volume_db = 0
+	$final1.volume_db = 0
+	$final2.volume_db = 0
 
 func part1():
 	$chords.volume_db = -2
@@ -47,7 +54,7 @@ func part3():
 	$kick.volume_db = 0
 	$mow.volume_db = 0
 
-func trumpets():
+func finale():
 	$trumpet.volume_db = 0
 func mute_song():
 	$"bass notes".volume_db = -80
@@ -58,6 +65,8 @@ func mute_song():
 	$notes.volume_db = -80
 	$trumpet.volume_db = -80
 	$mow.volume_db = -80
+	$final1.volume_db = -80
+	$final2.volume_db = -80
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	mute_song()
@@ -74,7 +83,8 @@ func _process(delta):
 			if Global.musicStage == 3:
 				part3()
 			if Global.ending == true:
-				trumpets()
+				finale()
+				$AnimationPlayer.play("finale")
 		elif Global.ending == true:
 			pass
 		else:

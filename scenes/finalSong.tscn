@@ -9,6 +9,69 @@
 [ext_resource type="AudioStream" uid="uid://bcutaj5arix0v" path="res://sounds/mountain song/good notes.mp3" id="7_3q3w2"]
 [ext_resource type="AudioStream" uid="uid://fgj0q81gl2lg" path="res://sounds/mountain song/trumpet.mp3" id="7_gpa7x"]
 [ext_resource type="AudioStream" uid="uid://ddjmuvdgw5ia1" path="res://sounds/mountain song/mow.mp3" id="9_o5bfc"]
+[ext_resource type="AudioStream" uid="uid://cvxogmfnwvr7q" path="res://sounds/mountain song/big frog finale-001.mp3" id="10_unar0"]
+[ext_resource type="AudioStream" uid="uid://c723ocycrdit1" path="res://sounds/mountain song/big frog finale-002.mp3" id="11_2geqn"]
+
+[sub_resource type="Animation" id="Animation_2geqn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("final1:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("final2:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+
+[sub_resource type="Animation" id="Animation_unar0"]
+resource_name = "finale"
+length = 28.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("final1:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7.0666666, 11.066667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-80.0, -80.0, -4.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("final2:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7.0666666, 11.066667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-80.0, -80.0, -6.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2geqn"]
+_data = {
+&"RESET": SubResource("Animation_2geqn"),
+&"finale": SubResource("Animation_unar0")
+}
 
 [node name="Node" type="Node" unique_id=882400982]
 script = ExtResource("1_3q3w2")
@@ -53,8 +116,21 @@ stream = ExtResource("9_o5bfc")
 volume_db = -80.0
 autoplay = true
 
+[node name="final1" type="AudioStreamPlayer" parent="." unique_id=1668284269]
+stream = ExtResource("10_unar0")
+volume_db = -80.0
+autoplay = true
+
+[node name="final2" type="AudioStreamPlayer" parent="." unique_id=1609190707]
+stream = ExtResource("11_2geqn")
+volume_db = -80.0
+autoplay = true
+
 [node name="Timer" type="Timer" parent="." unique_id=136349464]
 wait_time = 24.615
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1759427698]
+libraries/ = SubResource("AnimationLibrary_2geqn")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
